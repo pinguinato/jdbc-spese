@@ -1,0 +1,17 @@
+
+e
+java:S2095"HUse try-with-resources or close this "Connection" in a "finally" clause.(š’šı8û©Ô‡»1
+[
+java:S1854">Remove this useless assignment to local variable "connection".(š’šı8¾æÒ‡»1
+b
+java:S1854"@Remove this useless assignment to local variable "errorMessage".(¡²İÿÿÿÿÿ8ÿ©Ô‡»1
+L	java:S106	"+Replace this use of System.out by a logger.(•ìÅûÿÿÿÿ8ÀæÒ‡»1
+L
+java:S1481
+"/Remove this unused "connection" local variable.(ïÆ¥8ÁæÒ‡»1
+L	java:S106"+Replace this use of System.out by a logger.(ÑĞÈİşÿÿÿÿ8â×‡»1
+F
+java:S2115")Add password protection to this database.(š’šı8ÃæÒ‡»1
+L	java:S106"+Replace this use of System.out by a logger.(ã˜÷§üÿÿÿÿ8â×‡»1
+S
+java:S1481"1Remove this unused "errorMessage" local variable.(¡²İÿÿÿÿÿ8…ªÔ‡»1
