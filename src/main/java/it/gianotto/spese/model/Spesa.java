@@ -25,6 +25,11 @@ public class Spesa {
         this.totaleSpesa = totaleSpesa;
     }
 
+    @Override
+    public String toString() {
+        return "[ID: " + idSpesa + ", TITOLO: " + titoloSpesa + ", DESCRIZIONE " + descrizioneSpesa + ", AUTORE: " + autoreSpesa + ", TOTALE IN EURO: " + totaleSpesa + "]";
+    }
+
     private void validazioniOggettoSpesa(Integer idSpesa, String titoloSpesa, Double totaleSpesa) {
         // l'id di una spesa non deve essere nullo
         if (Objects.isNull(idSpesa)) {
