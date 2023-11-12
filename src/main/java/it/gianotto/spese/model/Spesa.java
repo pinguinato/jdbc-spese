@@ -1,9 +1,11 @@
 package it.gianotto.spese.model;
 
+import lombok.Builder;
 import lombok.Data;
 import java.util.Objects;
 
 @Data
+@Builder
 public class Spesa {
     private Integer idSpesa;
     private String titoloSpesa;
@@ -27,7 +29,7 @@ public class Spesa {
 
     @Override
     public String toString() {
-        return "[ID: " + idSpesa + ", TITOLO: " + titoloSpesa + ", DESCRIZIONE " + descrizioneSpesa + ", AUTORE: " + autoreSpesa + ", TOTALE IN EURO: " + totaleSpesa + "]";
+        return "\nID:" + idSpesa + "\nTITOLO:" + titoloSpesa + "\nDESCRIZIONE:" + descrizioneSpesa + "\nAUTORE:" + autoreSpesa + "\nTOTALE EURO:" + totaleSpesa+"\n";
     }
 
     private void validazioniOggettoSpesa(Integer idSpesa, String titoloSpesa, Double totaleSpesa) {
