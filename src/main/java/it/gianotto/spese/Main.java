@@ -1,27 +1,17 @@
 package it.gianotto.spese;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import it.gianotto.spese.dataIntegration.MySqlConnection;
+import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Test Spese JDBC example, hello world!");
-        Connection connection = null;
-        String connectionUrl = "jdbc:mysql://localhost/spese";
-        String mysqlUsername = "root";
-        String mySqlPassword = "";
-
-        try {
-
-            System.out.println("Tentativo di connessione con DriverManager...");
-            connection = DriverManager.getConnection(connectionUrl, mysqlUsername, mySqlPassword);
-            System.out.println("Collegato al database con Driver Manager");
-
-        } catch (SQLException sqlException) {
-            String errorMessage = "Impossibile ottenere una connessione da DriverManager";
-            sqlException.printStackTrace();
-        }
-
+        Logger logger = Logger.getLogger(Main.class.getName());
+        logger.info("Test Spese JDBC example, hello world!");
+        logger.info("Tentativo di connessione con DriverManager...");
+        MySqlConnection mySqlConnection = new MySqlConnection();
+        mySqlConnection.getConnection();
+        logger.info("Collegato al database con Driver Manager");
+        logger.info(mySqlConnection.getConnectionStatus());
+        mySqlConnection.closeConnection();
     }
 }
