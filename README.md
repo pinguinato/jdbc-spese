@@ -37,3 +37,6 @@ la connessione al database.
 **test** Esempi di Junit 5 test sul progetto, i test sulla connessione, non 
 funzionano se il database non è raggiungibile e/o le properties di connessione non sono 
 definite.
+
+**dao** Contiene l'interfaccia e l'implementazione per il DAO al MySql per gestire la logica 
+per l'estrazione dei dati su un db tipo MySql.
