@@ -18,10 +18,10 @@ public class Main {
     private static void mainApplicationMenu(MySqlConnection mySqlConnection) {
         Scanner s = new Scanner(System.in);
 
-        System.out.println("\nfdsfdsfs--------------------------------------------");
-        System.out.println("|   SPESE JDBC                             |");
-        System.out.println("|                   by Roberto Gianotto    |");
-        System.out.println("|   November 2023                          |");
+        System.out.println("\n--------------------------------------------");
+        System.out.println("|   SPESE JDBC                              |");
+        System.out.println("|                   by Roberto Gianotto     |");
+        System.out.println("|   November 2023                           |");
         System.out.println("--------------------------------------------\n");
         System.out.println("1) Visualizza tutte le spese");
         System.out.println("2) Visualizza una spesa");
