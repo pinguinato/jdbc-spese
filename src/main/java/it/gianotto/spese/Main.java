@@ -18,26 +18,42 @@ public class Main {
     private static void mainApplicationMenu(MySqlConnection mySqlConnection) {
         Scanner s = new Scanner(System.in);
 
+        System.out.println("\nfdsfdsfs--------------------------------------------");
+        System.out.println("|   SPESE JDBC                             |");
+        System.out.println("|                   by Roberto Gianotto    |");
+        System.out.println("|   November 2023                          |");
+        System.out.println("--------------------------------------------\n");
+        System.out.println("1) Visualizza tutte le spese");
+        System.out.println("2) Visualizza una spesa");
+        System.out.println("3) Aggiungi una spesa");
+        System.out.println("4) Elimina una spesa");
+        System.out.println("5) Stampa su file");
+        System.out.println("0) Esci dal programma");
         System.out.println("Effettuare una scelta valida: ");
-        System.out.println("1) Tutte le voci di spesa");
-        System.out.println("2) Esci");
-
         int choice = s.nextInt();
 
-        switch(choice) {
-            case 1:
+        while(choice !=0) {
+
+            if (choice == 1) {
                 SpesaDaoMySql spesaDaoMySql = new SpesaDaoMySql(mySqlConnection);
                 // ritorna in output la lista delle spese
                 List<Spesa> allExpenses = spesaDaoMySql.getAllSpese();
                 System.out.println(allExpenses);
-                break;
-            case 2:
                 // close connection
                 mySqlConnection.closeConnection();
-                break;
-            default:
+            } else {
                 System.out.println("Non hai effettuato una scelta tra quelle elencate disponibili.");
-                break;
+            }
+
+            System.out.println("\n");
+            System.out.println("1) Visualizza tutte le spese");
+            System.out.println("2) Visualizza una spesa");
+            System.out.println("3) Aggiungi una spesa");
+            System.out.println("4) Elimina una spesa");
+            System.out.println("5) Stampa su file");
+            System.out.println("0) Esci dal programma");
+            System.out.println("Effettuare una scelta valida: ");
+            choice = s.nextInt();
         }
     }
 }
