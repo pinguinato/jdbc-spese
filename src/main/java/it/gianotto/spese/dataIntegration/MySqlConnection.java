@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class MySqlConnection {
-    // Connection: oggetto java che mappa una connesisone con un dbms
+    // Connection: oggetto java che mappa una connessione con un dbms
     // getConnection() --> restituisce all'esterno l'oggetto connection
     // openConnection() --> metodo che si occupa di aprire una nuova connessione con MySql
     // closeConnection() --> metodo che si occupa di chiudere la connessione con MySql
