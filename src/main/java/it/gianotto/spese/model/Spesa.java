@@ -1,7 +1,10 @@
 package it.gianotto.spese.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Objects;
 
 @Data
@@ -18,7 +21,7 @@ public class Spesa {
 
     public Spesa(Integer idSpesa, String titoloSpesa, String descrizioneSpesa, String autoreSpesa, Double totaleSpesa) {
 
-        validazioniOggettoSpesa(idSpesa, titoloSpesa, totaleSpesa);
+        //validazioniOggettoSpesa(idSpesa, titoloSpesa, totaleSpesa);
 
         this.idSpesa = idSpesa;
         this.titoloSpesa = titoloSpesa;
@@ -29,7 +32,7 @@ public class Spesa {
 
     @Override
     public String toString() {
-        return "\nID:" + idSpesa + "\nTITOLO:" + titoloSpesa + "\nDESCRIZIONE:" + descrizioneSpesa + "\nAUTORE:" + autoreSpesa + "\nTOTALE EURO:" + totaleSpesa+"\n";
+        return "{id:" + idSpesa + ", titolo:" + titoloSpesa + ", descrizione:" + descrizioneSpesa + ", autore:" + autoreSpesa + ", totale in euro:" + totaleSpesa+"}";
     }
 
     private void validazioniOggettoSpesa(Integer idSpesa, String titoloSpesa, Double totaleSpesa) {

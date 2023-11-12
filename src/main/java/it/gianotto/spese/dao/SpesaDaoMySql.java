@@ -4,10 +4,8 @@ package it.gianotto.spese.dao;
 import it.gianotto.spese.dataIntegration.MySqlConnection;
 import it.gianotto.spese.exception.DatabaseException;
 import it.gianotto.spese.model.Spesa;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -123,7 +121,37 @@ public class SpesaDaoMySql implements SpesaDao {
 
     @Override
     public int addNewSpesa(Spesa spesa) {
-        return 1;
+        if (Objects.isNull(spesa)) {
+            throw new IllegalArgumentException("La spesa da inserire non può essere nulla.");
+        }
+
+        int generatedAutoIncrementId = handleAddNewSpesa(spesa);
+        return generatedAutoIncrementId;
+    }
+
+    private int handleAddNewSpesa(Spesa spesa) {
+        String sql = "INSERT INTO spesa (titolo_spesa,descrizione_spesa,ammontare_spesa,autore_spesa) " +
+                "VALUES (?,?,?,?)";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, spesa.getTitoloSpesa());
+            preparedStatement.setString(2, spesa.getDescrizioneSpesa());
+            preparedStatement.setDouble(3, spesa.getTotaleSpesa());
+            preparedStatement.setString(4, spesa.getAutoreSpesa());
+            preparedStatement.executeUpdate();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            int generatedAutoIncrementID = -1;
+            while(rs.next()) {
+                generatedAutoIncrementID = rs.getInt(1);
+                System.out.println("generatedAutoIncrementId: " + generatedAutoIncrementID);
+            }
+            return generatedAutoIncrementID;
+        } catch (SQLException sqlException) {
+            String errorMessage = "Impossibile eseguire la query di inserimento in addNewSpesa";
+            sqlException.printStackTrace();
+            throw new DatabaseException(errorMessage);
+        }
     }
 
     @Override

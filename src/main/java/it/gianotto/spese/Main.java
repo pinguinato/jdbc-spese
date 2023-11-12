@@ -17,6 +17,7 @@ public class Main {
 
     private static void mainApplicationMenu(MySqlConnection mySqlConnection) {
         Scanner s = new Scanner(System.in);
+        s.useDelimiter(System.getProperty("line.separator"));
 
         System.out.println("\n--------------------------------------------");
         System.out.println("|   SPESE JDBC                             |");
@@ -33,7 +34,6 @@ public class Main {
         int choice = s.nextInt();
 
         while(choice !=0) {
-
             if (choice == 1) {
                 SpesaDaoMySql spesaDaoMySql = new SpesaDaoMySql(mySqlConnection);
                 // ritorna in output la lista delle spese
@@ -50,13 +50,39 @@ public class Main {
                 System.out.println(spesa);
                 // close connection
                 mySqlConnection.closeConnection();
+            } else if (choice == 3) {
+                System.out.println("Inserisci una nuova spesa nel database delle spese: ");
+                // inserimento dei nuovi dati per la nuova spesa
+                System.out.println("Inserisci l'autore della nuova spesa:");
+                String autoreSpesa = s.next();
+                System.out.println("Inserisci il titolo della nuova spesa:");
+                String titoloSpesa = s.next();
+                System.out.println("Inserisci la descrizione della nuova spesa:");
+                String descrizioneSpesa = s.next();
+                System.out.println("Inserisci l'ammontare della nuova spesa:");
+                double totaleSpesa = s.nextDouble();
+
+                SpesaDaoMySql spesaDaoMySql = new SpesaDaoMySql(mySqlConnection);
+
+                Spesa nuovaSpesa = Spesa.builder()
+                        .titoloSpesa(titoloSpesa)
+                        .descrizioneSpesa(descrizioneSpesa)
+                        .autoreSpesa(autoreSpesa)
+                        .totaleSpesa(totaleSpesa)
+                        .build();
+
+                System.out.println("Ho inserito nel database la nuova spesa di ID: " + spesaDaoMySql.addNewSpesa(nuovaSpesa));
             }
 
             else {
                 System.out.println("Non hai effettuato una scelta tra quelle elencate disponibili.");
             }
 
-            System.out.println("\n");
+            System.out.println("\n--------------------------------------------");
+            System.out.println("|   SPESE JDBC                             |");
+            System.out.println("|                   by Roberto Gianotto    |");
+            System.out.println("|   November 2023                          |");
+            System.out.println("--------------------------------------------\n");
             System.out.println("1) Visualizza tutte le spese");
             System.out.println("2) Visualizza una spesa");
             System.out.println("3) Aggiungi una spesa");
@@ -66,5 +92,7 @@ public class Main {
             System.out.println("Effettuare una scelta valida: ");
             choice = s.nextInt();
         }
+        // close the Scanner
+        s.close();
     }
 }
