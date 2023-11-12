@@ -75,7 +75,50 @@ public class SpesaDaoMySql implements SpesaDao {
 
     @Override
     public Spesa getSpesaDetails(int idSpesa) {
-        return null;
+        if (idSpesa < 0) {
+            throw new IllegalArgumentException("L'ID di spesa non può essere un numero negativo.");
+        }
+        String sql = "SELECT id_spesa, titolo_spesa, descrizione_spesa, ammontare_spesa, autore_spesa " +
+                "FROM spesa WHERE id_spesa = ?";
+        try {
+            // get the sql query
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idSpesa);
+            // execute query
+            ResultSet rs = statement.executeQuery();
+            Spesa spesaDetails = handleSingleSpesa(rs);
+
+            if (Objects.isNull(spesaDetails)) {
+                throw new IllegalArgumentException("Non esiste una spesa che abbia questo ID nel database");
+            }
+
+            return spesaDetails;
+        } catch (SQLException sqlException) {
+            String errorMessage = "Impossibile eseguire la query in getSpesaDetails";
+            sqlException.printStackTrace();
+            throw new DatabaseException(errorMessage);
+        }
+    }
+
+    private Spesa handleSingleSpesa(ResultSet rs) throws SQLException {
+        Spesa spesa = null;
+        if (rs.next()) {
+            // recupera i dati di una singola spesa
+            int idSpesa = rs.getInt("id_spesa");
+            String titoloSpesa = rs.getString("titolo_spesa");
+            String descrizioneSpesa = rs.getString("descrizione_spesa");
+            Double totaleSpesa = rs.getDouble("ammontare_spesa");
+            String autoreSpesa = rs.getString("autore_spesa");
+
+            spesa = Spesa.builder()
+                    .idSpesa(idSpesa)
+                    .titoloSpesa(titoloSpesa)
+                    .descrizioneSpesa(Objects.nonNull(descrizioneSpesa) ? descrizioneSpesa : null)
+                    .autoreSpesa(Objects.nonNull(autoreSpesa) ? autoreSpesa : null)
+                    .totaleSpesa(totaleSpesa)
+                    .build();
+        }
+        return spesa;
     }
 
     @Override

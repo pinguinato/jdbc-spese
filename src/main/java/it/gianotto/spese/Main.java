@@ -19,9 +19,9 @@ public class Main {
         Scanner s = new Scanner(System.in);
 
         System.out.println("\n--------------------------------------------");
-        System.out.println("|   SPESE JDBC                              |");
-        System.out.println("|                   by Roberto Gianotto     |");
-        System.out.println("|   November 2023                           |");
+        System.out.println("|   SPESE JDBC                             |");
+        System.out.println("|                   by Roberto Gianotto    |");
+        System.out.println("|   November 2023                          |");
         System.out.println("--------------------------------------------\n");
         System.out.println("1) Visualizza tutte le spese");
         System.out.println("2) Visualizza una spesa");
@@ -41,7 +41,18 @@ public class Main {
                 System.out.println(allExpenses);
                 // close connection
                 mySqlConnection.closeConnection();
-            } else {
+            } else if (choice == 2) {
+                SpesaDaoMySql spesaDaoMySql = new SpesaDaoMySql(mySqlConnection);
+                // ritorna un dettaglio di una spesa in particolare
+                System.out.println("Inserisci l'id della spesa che vuoi visualizzare: ");
+                int idSpesa = s.nextInt();
+                Spesa spesa = spesaDaoMySql.getSpesaDetails(idSpesa);
+                System.out.println(spesa);
+                // close connection
+                mySqlConnection.closeConnection();
+            }
+
+            else {
                 System.out.println("Non hai effettuato una scelta tra quelle elencate disponibili.");
             }
 
