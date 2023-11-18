@@ -4,7 +4,6 @@ package it.gianotto.spese.dao;
 import it.gianotto.spese.dataIntegration.MySqlConnection;
 import it.gianotto.spese.exception.DatabaseException;
 import it.gianotto.spese.model.Spesa;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,7 +154,30 @@ public class SpesaDaoMySql implements SpesaDao {
     }
 
     @Override
-    public void deleteSpesaById(int idSpesa) { /* document why this method is empty */ }
+    public void deleteSpesaById(int idSpesa) {
+        // controllo se un id ha un formato valido
+        if (idSpesa < 0) {
+            throw new IllegalArgumentException("L'id di una spesa non può essere negativo.");
+        }
+
+        String sql = "DELETE FROM spesa WHERE idSpesa = ? ";
+
+        try {
+            int affectedRows;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idSpesa);
+            affectedRows = statement.executeUpdate();
+            // verifico se vado ad eliminare una spesa che esiste veramente oppure no
+            if (affectedRows == 0) {
+                throw new IllegalArgumentException("Non esiste un account con questo ID");
+            }
+        } catch (SQLException sqlException) {
+            // questo nel caso ci sia un vero e proprio errore MySQL
+            String errorMessage = "Impossibile eseguire la delete di una spesa in deleteSpesaById";
+            sqlException.printStackTrace();
+            throw new DatabaseException(errorMessage);
+        }
+    }
 
     @Override
     public void updateSpesa(Spesa spesa) {
