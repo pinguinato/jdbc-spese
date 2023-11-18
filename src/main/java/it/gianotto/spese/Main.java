@@ -72,9 +72,14 @@ public class Main {
                         .build();
 
                 System.out.println("Ho inserito nel database la nuova spesa di ID: " + spesaDaoMySql.addNewSpesa(nuovaSpesa));
-            }
+            } else if (choice == 4) {
+                System.out.println("Elimina una spesa nel database delle spese: ");
+                System.out.println("Inserisci l'id della spesa da eliminare: ");
+                int idSpesa = s.nextInt();
 
-            else {
+                SpesaDaoMySql spesaDaoMySql = new SpesaDaoMySql(mySqlConnection);
+                spesaDaoMySql.deleteSpesaById(idSpesa);
+            } else {
                 System.out.println("Non hai effettuato una scelta tra quelle elencate disponibili.");
             }
 

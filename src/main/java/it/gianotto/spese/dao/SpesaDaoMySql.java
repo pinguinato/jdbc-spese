@@ -160,7 +160,7 @@ public class SpesaDaoMySql implements SpesaDao {
             throw new IllegalArgumentException("L'id di una spesa non può essere negativo.");
         }
 
-        String sql = "DELETE FROM spesa WHERE idSpesa = ? ";
+        String sql = "DELETE FROM spesa WHERE id_spesa = ? ";
 
         try {
             int affectedRows;
