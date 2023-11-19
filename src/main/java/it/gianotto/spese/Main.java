@@ -29,6 +29,7 @@ public class Main {
         System.out.println("3) Aggiungi una spesa");
         System.out.println("4) Elimina una spesa");
         System.out.println("5) Stampa su file");
+        System.out.println("6) Aggiorna una spesa");
         System.out.println("0) Esci dal programma");
         System.out.println("Effettuare una scelta valida: ");
         int choice = s.nextInt();
@@ -79,6 +80,35 @@ public class Main {
 
                 SpesaDaoMySql spesaDaoMySql = new SpesaDaoMySql(mySqlConnection);
                 spesaDaoMySql.deleteSpesaById(idSpesa);
+            } else if (choice == 6) {
+                System.out.println("Aggiorna una spesa nel database delle spese:");
+
+                System.out.println("Inserisci i dati da aggiornare:");
+                System.out.println("Inserisci l'id della spesa da aggiornare:");
+                Integer idSpesaDaAggiornare = s.nextInt();
+
+                System.out.println("Aggiorna l'autore della spesa:");
+                String autoreSpesa = s.next();
+                System.out.println("Aggiorna il titolo della spesa:");
+                String titoloSpesa = s.next();
+                System.out.println("Aggiorna la descrizione della spesa:");
+                String descrizioneSpesa = s.next();
+                System.out.println("Aggiorna l'ammontare della spesa:");
+                double totaleSpesa = s.nextDouble();
+
+                SpesaDaoMySql spesaDaoMySql = new SpesaDaoMySql(mySqlConnection);
+
+                Spesa spesaAggiornata = Spesa.builder()
+                        .idSpesa(idSpesaDaAggiornare)
+                        .titoloSpesa(titoloSpesa)
+                        .descrizioneSpesa(descrizioneSpesa)
+                        .autoreSpesa(autoreSpesa)
+                        .totaleSpesa(totaleSpesa)
+                        .build();
+
+                spesaDaoMySql.updateSpesa(spesaAggiornata);
+                System.out.println("Aggiornamento della spesa effettuato");
+
             } else {
                 System.out.println("Non hai effettuato una scelta tra quelle elencate disponibili.");
             }
@@ -93,6 +123,7 @@ public class Main {
             System.out.println("3) Aggiungi una spesa");
             System.out.println("4) Elimina una spesa");
             System.out.println("5) Stampa su file");
+            System.out.println("6) Aggiorna una spesa");
             System.out.println("0) Esci dal programma");
             System.out.println("Effettuare una scelta valida: ");
             choice = s.nextInt();

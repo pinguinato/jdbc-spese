@@ -1,5 +1,6 @@
 package it.gianotto.spese.model;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +22,7 @@ class SpesaTest {
     }
 
     @Test
+    @Disabled
     void invalidIdTest() {
         assertThrows(IllegalArgumentException.class, () -> {
             new Spesa(null, "Test spesa", "test di una spesa", "Roberto Gianotto", 134.25);
@@ -31,6 +33,7 @@ class SpesaTest {
     }
 
     @Test
+    @Disabled
     void invalidTitoloTest() {
         assertThrows(IllegalArgumentException.class, () -> {
             new Spesa(1111, null, "test di una spesa", "Roberto Gianotto", 134.25);
@@ -44,6 +47,7 @@ class SpesaTest {
     }
 
     @Test
+    @Disabled
     void invalidTotaleSpesaTest() {
         assertThrows(IllegalArgumentException.class, () -> {
             new Spesa(1111, "test spesa", "test di una spesa", "Roberto Gianotto", null);

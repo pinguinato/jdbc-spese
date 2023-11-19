@@ -181,8 +181,29 @@ public class SpesaDaoMySql implements SpesaDao {
 
     @Override
     public void updateSpesa(Spesa spesa) {
-        // missing implementation
+        if (Objects.isNull(spesa)) {
+            throw new IllegalArgumentException("La spesa non può essare nulla.");
+        }
+        // aggiornamento di una spesa nel database
+        handleUpdateSpesa(spesa);
     }
 
+    private void handleUpdateSpesa(Spesa spesa) {
+        String sql = "UPDATE spesa SET titolo_spesa = ?, descrizione_spesa = ?, ammontare_spesa = ?, autore_spesa = ? WHERE id_spesa = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, spesa.getTitoloSpesa());
+            preparedStatement.setString(2, spesa.getDescrizioneSpesa());
+            preparedStatement.setDouble(3, spesa.getTotaleSpesa());
+            preparedStatement.setString(4, spesa.getAutoreSpesa());
+            preparedStatement.setInt(5, spesa.getIdSpesa());
+            preparedStatement.executeUpdate();
 
+        } catch (SQLException sqlException) {
+            // questo nel caso ci sia un vero e proprio errore MySQL
+            String errorMessage = "Impossibile eseguire l'aggiornamento di una spesa in handleUpdateSpesa";
+            sqlException.printStackTrace();
+            throw new DatabaseException(errorMessage);
+        }
+    }
 }
