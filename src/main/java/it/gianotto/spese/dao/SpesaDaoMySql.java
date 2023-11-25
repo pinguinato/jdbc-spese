@@ -206,4 +206,16 @@ public class SpesaDaoMySql implements SpesaDao {
             throw new DatabaseException(errorMessage);
         }
     }
+
+    public void resettaAutoIncrement() {
+        String sql = "ALTER TABLE spesa AUTO_INCREMENT = 1";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            String errorMessage = "Impossibile eseguire il reset dell'auto increment a 1";
+            sqlException.printStackTrace();
+            throw new DatabaseException(errorMessage);
+        }
+    }
 }
