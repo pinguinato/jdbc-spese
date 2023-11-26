@@ -1,8 +1,4 @@
 
-X	java:S125"<This block of commented-out lines of code should be removed.(ÎŸ¤º8ƒ«î¡¼1
-X
-java:S1128"6Remove this unused import 'lombok.AllArgsConstructor'.(´œ¾öùÿÿÿÿ8¤Æğ¡¼1
-R
-java:S1128"5Remove this unused import 'lombok.NoArgsConstructor'.(¸¨›8¤Æğ¡¼1
+X	java:S125"<This block of commented-out lines of code should be removed.(ÎŸ¤º8ƒ«î¡¼1
 Y
-java:S1144&"<Remove this unused private "validazioniOggettoSpesa" method.(Á¹ı¶8Š«î¡¼1
+java:S1144#"<Remove this unused private "validazioniOggettoSpesa" method.(Á¹ı¶8Š«î¡¼1

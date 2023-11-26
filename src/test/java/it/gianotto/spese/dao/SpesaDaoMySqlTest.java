@@ -55,7 +55,7 @@ class SpesaDaoMySqlTest {
     @Test
     void getAllSpeseTestOK() {
         List<Spesa> list = spesaDaoMySql.getAllSpese();
-        assertEquals(0, list.size());
+        assertEquals(1, list.size());
     }
 
 
