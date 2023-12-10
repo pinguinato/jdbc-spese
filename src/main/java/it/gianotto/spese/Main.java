@@ -17,7 +17,9 @@ public class Main {
 
     private static void mainApplicationMenu(MySqlConnection mySqlConnection) {
         Scanner s = new Scanner(System.in);
-        s.useDelimiter(System.getProperty("line.separator"));
+        // FIX: useDelimiter work on both Windows and Linux
+        //s.useDelimiter(System.getProperty("line.separator"));
+        s.useDelimiter("[;\r\n]");
 
         System.out.println("\n--------------------------------------------");
         System.out.println("|   SPESE JDBC                             |");

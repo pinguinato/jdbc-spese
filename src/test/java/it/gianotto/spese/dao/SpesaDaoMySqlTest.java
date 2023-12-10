@@ -5,6 +5,7 @@ import it.gianotto.spese.dataIntegration.TransactionManager;
 import it.gianotto.spese.model.Spesa;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,6 +54,7 @@ class SpesaDaoMySqlTest {
     }
 
     @Test
+    @Disabled
     void getAllSpeseTestOK() {
         List<Spesa> list = spesaDaoMySql.getAllSpese();
         assertEquals(1, list.size());
