@@ -22,9 +22,7 @@ public class Main {
         s.useDelimiter("[;\r\n]");
 
         System.out.println("\n--------------------------------------------");
-        System.out.println("|   SPESE JDBC                             |");
-        System.out.println("|                   by Roberto Gianotto    |");
-        System.out.println("|   November 2023                          |");
+        System.out.println("|   SPESE JDBC by Roberto Gianotto           |");
         System.out.println("--------------------------------------------\n");
         System.out.println("1) Visualizza tutte le spese");
         System.out.println("2) Visualizza una spesa");
@@ -116,9 +114,7 @@ public class Main {
             }
 
             System.out.println("\n--------------------------------------------");
-            System.out.println("|   SPESE JDBC                             |");
-            System.out.println("|                   by Roberto Gianotto    |");
-            System.out.println("|   November 2023                          |");
+            System.out.println("|   SPESE JDBC by Roberto Gianotto           |");
             System.out.println("--------------------------------------------\n");
             System.out.println("1) Visualizza tutte le spese");
             System.out.println("2) Visualizza una spesa");

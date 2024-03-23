@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class SpesaDaoMySql implements SpesaDao {
 
-    private Connection connection;
+    private final Connection connection;
 
     public SpesaDaoMySql(MySqlConnection mySqlConnection) {
         if (Objects.isNull(mySqlConnection)) {
@@ -124,8 +124,7 @@ public class SpesaDaoMySql implements SpesaDao {
             throw new IllegalArgumentException("La spesa da inserire non può essere nulla.");
         }
 
-        int generatedAutoIncrementId = handleAddNewSpesa(spesa);
-        return generatedAutoIncrementId;
+        return handleAddNewSpesa(spesa);
     }
 
     private int handleAddNewSpesa(Spesa spesa) {
