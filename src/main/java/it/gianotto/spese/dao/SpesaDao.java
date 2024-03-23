@@ -14,4 +14,6 @@ interface SpesaDao {
     void deleteSpesaById(int idSpesa);
 
     void updateSpesa(Spesa spesa);
+
+    Double getTotalSpese();
 }

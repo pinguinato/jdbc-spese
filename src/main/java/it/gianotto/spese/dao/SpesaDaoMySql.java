@@ -217,4 +217,32 @@ public class SpesaDaoMySql implements SpesaDao {
             throw new DatabaseException(errorMessage);
         }
     }
+
+    @Override
+    public Double getTotalSpese() {
+
+        String sql = "SELECT SUM(s.ammontare_spesa) AS total FROM spese.spesa s";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+
+            return handleGetTotalSpese(rs);
+
+        } catch (SQLException sqlException) {
+            String errorMessage = "Impossibile eseguire la query in getTotalSpese";
+            sqlException.printStackTrace();
+            throw new DatabaseException(errorMessage);
+        }
+    }
+
+    private Double handleGetTotalSpese(ResultSet rs) throws SQLException {
+        Double total = null;
+
+        while(rs.next()) {
+            total = rs.getDouble("total");
+        }
+
+        return total;
+    }
 }

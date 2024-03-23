@@ -30,6 +30,7 @@ public class Main {
         System.out.println("4) Elimina una spesa");
         System.out.println("5) Stampa su file");
         System.out.println("6) Aggiorna una spesa");
+        System.out.println("7) Totale delle spese");
         System.out.println("0) Esci dal programma");
         System.out.println("Effettuare una scelta valida: ");
         int choice = s.nextInt();
@@ -109,6 +110,11 @@ public class Main {
                 spesaDaoMySql.updateSpesa(spesaAggiornata);
                 System.out.println("Aggiornamento della spesa effettuato");
 
+            } else if (choice == 7) {
+                SpesaDaoMySql spesaDaoMySql = new SpesaDaoMySql(mySqlConnection);
+                Double totale = spesaDaoMySql.getTotalSpese();
+                System.out.println("Totale delle spese: " + totale);
+
             } else {
                 System.out.println("Non hai effettuato una scelta tra quelle elencate disponibili.");
             }
@@ -122,6 +128,7 @@ public class Main {
             System.out.println("4) Elimina una spesa");
             System.out.println("5) Stampa su file");
             System.out.println("6) Aggiorna una spesa");
+            System.out.println("7) Totale delle spese");
             System.out.println("0) Esci dal programma");
             System.out.println("Effettuare una scelta valida: ");
             choice = s.nextInt();
