@@ -4,6 +4,7 @@ import it.gianotto.spese.dao.SpesaDaoMySql;
 import it.gianotto.spese.dataIntegration.MySqlConnection;
 import it.gianotto.spese.model.Spesa;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -16,7 +17,7 @@ public class Main {
     }
 
     private static void mainApplicationMenu(MySqlConnection mySqlConnection) {
-        Scanner s = new Scanner(System.in);
+        Scanner s = new Scanner(System.in).useLocale(Locale.ITALY);;
         // FIX: useDelimiter work on both Windows and Linux
         //s.useDelimiter(System.getProperty("line.separator"));
         s.useDelimiter("[;\r\n]");
