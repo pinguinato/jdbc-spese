@@ -60,7 +60,6 @@ public class SpesaDaoMySql implements SpesaDao {
             String descrizioneSpesa = rs.getString("descrizione_spesa");
             Double totaleSpesa = rs.getDouble("ammontare_spesa");
             String autoreSpesa = rs.getString("autore_spesa");
-            // get date of spesa
             Date dataSpesa = Objects.nonNull(rs.getDate("data_spesa")) ? rs.getDate("data_spesa") : null;
 
             Spesa spesa = Spesa.builder()
@@ -84,7 +83,7 @@ public class SpesaDaoMySql implements SpesaDao {
         if (idSpesa < 0) {
             throw new IllegalArgumentException("L'ID di spesa non può essere un numero negativo.");
         }
-        String sql = "SELECT id_spesa, titolo_spesa, descrizione_spesa, ammontare_spesa, autore_spesa " +
+        String sql = "SELECT id_spesa, titolo_spesa, descrizione_spesa, ammontare_spesa, autore_spesa, data_spesa " +
                 "FROM spesa WHERE id_spesa = ?";
         try {
             // get the sql query
@@ -115,6 +114,7 @@ public class SpesaDaoMySql implements SpesaDao {
             String descrizioneSpesa = rs.getString("descrizione_spesa");
             Double totaleSpesa = rs.getDouble("ammontare_spesa");
             String autoreSpesa = rs.getString("autore_spesa");
+            Date dataSpesa = Objects.nonNull(rs.getDate("data_spesa")) ? rs.getDate("data_spesa") : null;
 
             spesa = Spesa.builder()
                     .idSpesa(idSpesa)
@@ -122,6 +122,7 @@ public class SpesaDaoMySql implements SpesaDao {
                     .descrizioneSpesa(Objects.nonNull(descrizioneSpesa) ? descrizioneSpesa : null)
                     .autoreSpesa(Objects.nonNull(autoreSpesa) ? autoreSpesa : null)
                     .totaleSpesa(totaleSpesa)
+                    .dataSpesa(dataSpesa)
                     .build();
         }
         return spesa;
