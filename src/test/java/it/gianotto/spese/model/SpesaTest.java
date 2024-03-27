@@ -2,6 +2,11 @@ package it.gianotto.spese.model;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SpesaTest {
@@ -15,7 +20,7 @@ class SpesaTest {
 
     @Test
     void constructorTestOk() {
-        Spesa spesa = new Spesa(1, "Test spesa", "test di una spesa", "Roberto Gianotto", 134.25);
+        Spesa spesa = new Spesa(1, "Test spesa", "test di una spesa", "Roberto Gianotto", 134.25, Date.valueOf(LocalDate.now()));
         assertNotNull(spesa);
         assertEquals(Spesa.class, spesa.getClass());
         System.out.println(spesa);
@@ -25,10 +30,10 @@ class SpesaTest {
     @Disabled
     void invalidIdTest() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Spesa(null, "Test spesa", "test di una spesa", "Roberto Gianotto", 134.25);
+            new Spesa(null, "Test spesa", "test di una spesa", "Roberto Gianotto", 134.25, Date.valueOf(LocalDate.now()));
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            new Spesa(-1, "Test spesa", "test di una spesa", "Roberto Gianotto", 134.25);
+            new Spesa(-1, "Test spesa", "test di una spesa", "Roberto Gianotto", 134.25, Date.valueOf(LocalDate.now()));
         });
     }
 
@@ -36,13 +41,13 @@ class SpesaTest {
     @Disabled
     void invalidTitoloTest() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Spesa(1111, null, "test di una spesa", "Roberto Gianotto", 134.25);
+            new Spesa(1111, null, "test di una spesa", "Roberto Gianotto", 134.25, Date.valueOf(LocalDate.now()));
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            new Spesa(1111, "", "test di una spesa", "Roberto Gianotto", 134.25);
+            new Spesa(1111, "", "test di una spesa", "Roberto Gianotto", 134.25, Date.valueOf(LocalDate.now()));
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            new Spesa(1111, "aa", "test di una spesa", "Roberto Gianotto", 134.25);
+            new Spesa(1111, "aa", "test di una spesa", "Roberto Gianotto", 134.25, Date.valueOf(LocalDate.now()));
         });
     }
 
@@ -50,10 +55,10 @@ class SpesaTest {
     @Disabled
     void invalidTotaleSpesaTest() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Spesa(1111, "test spesa", "test di una spesa", "Roberto Gianotto", null);
+            new Spesa(1111, "test spesa", "test di una spesa", "Roberto Gianotto", null, Date.valueOf(LocalDate.now()));
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            new Spesa(1111, "test spesa", "test di una spesa", "Roberto Gianotto", -10.01);
+            new Spesa(1111, "test spesa", "test di una spesa", "Roberto Gianotto", -10.01, Date.valueOf(LocalDate.now()));
         });
     }
 

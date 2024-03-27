@@ -2,6 +2,10 @@ package it.gianotto.spese.model;
 
 import lombok.Builder;
 import lombok.Data;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Data
@@ -12,11 +16,12 @@ public class Spesa {
     private String descrizioneSpesa;
     private String autoreSpesa;
     private Double totaleSpesa;
+    private Date dataSpesa;
 
     public Spesa() {
     }
 
-    public Spesa(Integer idSpesa, String titoloSpesa, String descrizioneSpesa, String autoreSpesa, Double totaleSpesa) {
+    public Spesa(Integer idSpesa, String titoloSpesa, String descrizioneSpesa, String autoreSpesa, Double totaleSpesa, Date dataSpesa) {
 
         //validazioniOggettoSpesa(idSpesa, titoloSpesa, totaleSpesa);
 
@@ -25,11 +30,16 @@ public class Spesa {
         this.descrizioneSpesa = descrizioneSpesa;
         this.autoreSpesa = autoreSpesa;
         this.totaleSpesa = totaleSpesa;
+        this.dataSpesa = Objects.nonNull(dataSpesa) ? dataSpesa : null;
     }
 
     @Override
     public String toString() {
-        return "{id:" + idSpesa + ", titolo:" + titoloSpesa + ", descrizione:" + descrizioneSpesa + ", autore:" + autoreSpesa + ", totale in euro:" + totaleSpesa+"}";
+        if (this.dataSpesa == null) {
+            return "{id:" + idSpesa + ", titolo:" + titoloSpesa + ", descrizione:" + descrizioneSpesa + ", autore:" + autoreSpesa + ", totale in euro:" + totaleSpesa+ ", data: - }";
+        } else {
+            return "{id:" + idSpesa + ", titolo:" + titoloSpesa + ", descrizione:" + descrizioneSpesa + ", autore:" + autoreSpesa + ", totale in euro:" + totaleSpesa+ ", data: " + dataSpesa + "}";
+        }
     }
 
     private void validazioniOggettoSpesa(Integer idSpesa, String titoloSpesa, Double totaleSpesa) {

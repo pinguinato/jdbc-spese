@@ -5,8 +5,14 @@ import it.gianotto.spese.dataIntegration.MySqlConnection;
 import it.gianotto.spese.exception.DatabaseException;
 import it.gianotto.spese.model.Spesa;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class SpesaDaoMySql implements SpesaDao {
@@ -27,7 +33,7 @@ public class SpesaDaoMySql implements SpesaDao {
 
     @Override
     public List<Spesa> getAllSpese() {
-        String sql = "SELECT id_spesa, titolo_spesa, descrizione_spesa, ammontare_spesa, autore_spesa " +
+        String sql = "SELECT id_spesa, titolo_spesa, descrizione_spesa, ammontare_spesa, autore_spesa, data_spesa " +
                 "FROM spesa";
         try {
             // get the sql query
@@ -37,7 +43,7 @@ public class SpesaDaoMySql implements SpesaDao {
 
             return handleAllSpese(rs);
         } catch (SQLException sqlException) {
-            String errorMessage = "Impossibile eseguire la query in getAllSpese";
+            String errorMessage = "Impossibile eseguire la query in getAllSpese: " + sqlException.getMessage();
             sqlException.printStackTrace();
             throw new DatabaseException(errorMessage);
         }
@@ -54,6 +60,8 @@ public class SpesaDaoMySql implements SpesaDao {
             String descrizioneSpesa = rs.getString("descrizione_spesa");
             Double totaleSpesa = rs.getDouble("ammontare_spesa");
             String autoreSpesa = rs.getString("autore_spesa");
+            // get date of spesa
+            Date dataSpesa = Objects.nonNull(rs.getDate("data_spesa")) ? rs.getDate("data_spesa") : null;
 
             Spesa spesa = Spesa.builder()
                     .idSpesa(idSpesa)
@@ -61,6 +69,7 @@ public class SpesaDaoMySql implements SpesaDao {
                     .descrizioneSpesa(Objects.nonNull(descrizioneSpesa) ? descrizioneSpesa : null)
                     .autoreSpesa(Objects.nonNull(autoreSpesa) ? autoreSpesa : null)
                     .totaleSpesa(totaleSpesa)
+                    .dataSpesa(dataSpesa)
                     .build();
             // add Spesa to list
             spesaList.add(spesa);
@@ -128,8 +137,8 @@ public class SpesaDaoMySql implements SpesaDao {
     }
 
     private int handleAddNewSpesa(Spesa spesa) {
-        String sql = "INSERT INTO spesa (titolo_spesa,descrizione_spesa,ammontare_spesa,autore_spesa) " +
-                "VALUES (?,?,?,?)";
+        String sql = "INSERT INTO spesa (titolo_spesa,descrizione_spesa,ammontare_spesa,autore_spesa,data_spesa) " +
+                "VALUES (?,?,?,?,?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -137,6 +146,7 @@ public class SpesaDaoMySql implements SpesaDao {
             preparedStatement.setString(2, spesa.getDescrizioneSpesa());
             preparedStatement.setDouble(3, spesa.getTotaleSpesa());
             preparedStatement.setString(4, spesa.getAutoreSpesa());
+            preparedStatement.setObject(5, LocalDateTime.now());
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             int generatedAutoIncrementID = -1;

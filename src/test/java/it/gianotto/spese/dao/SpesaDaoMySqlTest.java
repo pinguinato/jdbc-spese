@@ -7,6 +7,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,8 +33,8 @@ class SpesaDaoMySqlTest {
         transactionManager.startTransaction(); // avvia una transazione
 
         // questi dati devono essere presenti nella tabella di mysql
-        spesaTest1 = new Spesa(1, "Spesa di Test 1", "Un esempio di spesa di prova 1", "Roberto Gianotto", 10.00);
-        spesaTest2 = new Spesa(2, "Spesa di Test 2", "Un esempio di spesa di prova 2", "Roberto Gianotto", 10.00);
+        spesaTest1 = new Spesa(1, "Spesa di Test 1", "Un esempio di spesa di prova 1", "Roberto Gianotto", 10.00, Date.valueOf(LocalDate.now()));
+        spesaTest2 = new Spesa(2, "Spesa di Test 2", "Un esempio di spesa di prova 2", "Roberto Gianotto", 10.00, Date.valueOf(LocalDate.now()));
     }
 
     @AfterEach
